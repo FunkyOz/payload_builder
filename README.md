@@ -8,22 +8,15 @@ const PayloadBuilder = require('payload_builder');
 
 const builderPayload = new PayloadBuilder();
 builderPayload.merge({
-    data: {
+    prop: {
         test: 'This is a test'
     }
 }).merge({
-    datum: {
+    property: {
         test: 'Another test'
     }
 });
 
-builderPayload.getPayload();
-// {
-//   data: {
-//     test: 'This is a test'
-//   }
-//   datum: {
-//     test: 'Another test'
-//   }
-// }
+console.log(builderPayload.getPayload());
+// { data: { prop: { test: 'This is a test' }, property: { test: 'Another test' } } }
 ```
