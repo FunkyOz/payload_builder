@@ -29,7 +29,7 @@ PayloadBuilder.prototype.setPayloadKey = function (key) {
     return this;
 };
 
-PayloadBuilder.prototype.getPayload = function (payload) {
+PayloadBuilder.prototype.getPayload = function () {
     var payload = {};
     payload[this.payloadKey] = this.payload;
 
