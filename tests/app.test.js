@@ -4,7 +4,8 @@ const assert = require('assert');
 describe('PayloadBuilder', function () {
     it('merge object and return it', function () {
         let builderPayload = new PayloadBuilder();
-        builderPayload.setPayloadKey('test')
+
+        let payload = builderPayload.setPayloadName('test')
             .merge({
                 prop: {
                     test: 'This is a test'
@@ -13,9 +14,11 @@ describe('PayloadBuilder', function () {
                 property: {
                     test: 'Another thest'
                 }
-            });
+            }).build();
 
-        assert.deepStrictEqual(builderPayload.getPayload(), {
+        console.log(payload);
+
+        assert.deepStrictEqual(payload, {
             test: {
                 prop: {
                     test: 'This is a test'
@@ -37,7 +40,7 @@ describe('PayloadBuilder', function () {
     it('set paylod key with invalid value', function () {
         let builderPayload = new PayloadBuilder();
         assert.throws(function () {
-            builderPayload.setPayloadKey({});
-        }, Error, 'Payload must be an object');
+            builderPayload.setPayloadName({});
+        }, Error, 'Payload must be a string');
     });
 });

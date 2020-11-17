@@ -8,7 +8,7 @@ PayloadBuilderError.prototype.constructor = PayloadBuilderError;
 
 function PayloadBuilder() {
     this.payload = {};
-    this.payloadKey = 'data';
+    this.payloadName = 'data';
 }
 
 PayloadBuilder.prototype.merge = function (payload) {
@@ -20,20 +20,24 @@ PayloadBuilder.prototype.merge = function (payload) {
     return this;
 };
 
-PayloadBuilder.prototype.setPayloadKey = function (key) {
-    if (!isString(key) && !isNumber(key)) {
-        throw new PayloadBuilderError('Key must be a string or a number');
+PayloadBuilder.prototype.setPayloadName = function (payloadName) {
+    if (!isString(payloadName)) {
+        throw new PayloadBuilderError('Key must be a string');
     }
-    this.payloadKey = key;
 
+    this.payloadName = payloadName;
     return this;
 };
 
-PayloadBuilder.prototype.getPayload = function () {
-    var payload = {};
-    payload[this.payloadKey] = this.payload;
+PayloadBuilder.prototype.build = function (payloadName) {
+    if (payloadName) {
+        this.payloadName = payloadName;
+    }
+    
+    var object = {};
+    object[this.payloadName] = this.payload;
 
-    return payload;
+    return object;
 };
 
 module.exports.PayloadBuilder = PayloadBuilder;
